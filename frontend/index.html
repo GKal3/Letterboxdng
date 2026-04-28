@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>TOIMMF</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Titillium+Web:wght@300;400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+    <!-- HEADER -->
+    <header>
+        <div class="header-inner">
+            <div class="header-left">
+                <a href="#" class="logo-link">
+                    <img class="logo" src="letterboxdng.png" alt="Letterboxd"/>
+                </a>
+                <nav class="main-nav">
+                    <a href="#">Films</a>
+                    <a href="#">Lists</a>
+                    <a href="#">Members</a>
+                    <a href="#">Journal</a>
+                </nav>
+            </div>
+            <div class="header-right">
+                <a href="#" class="btn-sign-in">Sign in</a>
+                <a href="#" class="btn-create">Create account</a>
+            </div>
+        </div>
+    </header>
+
+    <!-- FILM HERO -->
+    <div class="film-hero">
+        <div class="film-hero-backdrop"></div>
+        <div class="film-hero-inner">
+            <div class="film-poster-wrap">
+                <img class="film-poster" src="poster.jpg" alt="Poster"/>
+            </div>
+            <div class="film-info">
+                <h1 class="film-title">Tutti odiano il momento mini-film</h1>
+                <div class="film-meta">
+                    <a href="#" class="film-year">2026</a>
+                    <span class="film-directed">Directed by <a href="#">Arturo Brundo</a></span>
+                </div>
+                <p class="film-synopsis">Un simpatico e disfunzionale gruppo di amici si ritrova giornalmente nella biblioteca di un piccolo paesino di campagna. I ragazzi in breve tempo fanno amicizia e vivono esperienze al limite del surreale. Ispirato ai quadri di Salvador Dalì, il visionario regista descrive una pittoresca realtà quotidiana, al cui interno si nasconde un terribile segreto.</p>
+
+                <!-- FILM ACTIONS -->
+                <div class="film-actions">
+                    <button class="action-btn action-watch" title="Mark as watched">
+                        <svg width="16" height="16" viewBox="0 0 32 32" fill="currentColor"><path d="M16 3C8.8 3 3 8.8 3 16s5.8 13 13 13 13-5.8 13-13S23.2 3 16 3zm-3 19.4V9.6l10 6.4-10 6.4z"/></svg>
+                    </button>
+                    <button class="action-btn action-like" title="Like">
+                        <svg width="16" height="16" viewBox="0 0 32 32" fill="currentColor"><path d="M16 28l-1.4-1.3C7.4 20 3 16.1 3 11.5 3 7.9 5.9 5 9.5 5c1.9 0 3.7.9 4.9 2.3L16 8.9l1.6-1.6C18.8 5.9 20.6 5 22.5 5 26.1 5 29 7.9 29 11.5c0 4.6-4.4 8.5-11.6 15.2L16 28z"/></svg>
+                    </button>
+                    <button class="action-btn action-watchlist" title="Add to watchlist">
+                        <svg width="16" height="16" viewBox="0 0 32 32" fill="currentColor"><path d="M8 3h16v26l-8-5-8 5V3z"/></svg>
+                    </button>
+                    <div class="star-rating">
+                        <span class="star" data-val="1">★</span>
+                        <span class="star" data-val="2">★</span>
+                        <span class="star" data-val="3">★</span>
+                        <span class="star" data-val="4">★</span>
+                        <span class="star" data-val="5">★</span>
+                    </div>
+                    <a href="review.html" class="btn-review">Review or log</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- FILM TABS -->
+    <div class="film-tabs-bar">
+        <div class="film-tabs-inner">
+            <a href="#" class="film-tab active">Cast</a>
+            <a href="#" class="film-tab">Crew</a>
+            <a href="#" class="film-tab">Details</a>
+            <a href="#" class="film-tab">Genres</a>
+            <a href="#" class="film-tab">Releases</a>
+        </div>
+    </div>
+
+    <!-- MAIN CONTENT -->
+    <div class="content-wrap">
+
+        <!-- MAIN COLUMN -->
+        <div class="col-main">
+
+            <!-- RATINGS HISTOGRAM -->
+            <section class="section-block">
+                <h2 class="section-title">Ratings</h2>
+                <div class="ratings-row">
+                    <div class="ratings-score" id="avg-rating">–</div>
+                    <div class="ratings-histogram">
+                        <div class="histogram-bars"></div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- POPULAR REVIEWS -->
+            <section class="section-block">
+                <h2 class="section-title">Popular reviews <a href="#" class="section-more">More</a></h2>
+                <div id="reviews">
+                    <!-- Reviews injected by script.js -->
+                </div>
+            </section>
+
+        </div>
+
+        <!-- SIDEBAR -->
+        <div class="col-sidebar">
+
+            <div class="sidebar-section">
+                <h3 class="sidebar-label">Cast</h3>
+                <p class="sidebar-content">
+                    <a href="#">Chiara Vivona</a>,
+                    <a href="#">Arturo Brundo</a>,
+                    <a href="#">Elisa Simeone</a>,
+                    <a href="#">Giulia Kalemi</a>,
+                    <a href="#">Lorenzo Strati</a>,
+                    <a href="#">Gwen Butry Cerantola</a>,
+                    <a href="#">Giulio Zanella</a>,
+                    <a href="#">Rosela Meshi</a>,
+                    <a href="#">Luna Tommasi</a>,
+                    <a href="#">Serena Crippa</a>,
+                    <a href="#">Nicolò Cassarino</a>
+                </p>
+            </div>
+
+            <div class="sidebar-section">
+                <h3 class="sidebar-label">Director</h3>
+                <p class="sidebar-content"><a href="#">Arturo Brundo</a></p>
+            </div>
+
+            <div class="sidebar-section">
+                <h3 class="sidebar-label">Genres</h3>
+                <p class="sidebar-content">
+                    <a href="#" class="genre-tag">Drama</a>
+                </p>
+            </div>
+
+            <div class="sidebar-section">
+                <h3 class="sidebar-label">Runtime</h3>
+                <p class="sidebar-content">108 mins</p>
+            </div>
+
+            <div class="sidebar-section">
+                <h3 class="sidebar-label">Country</h3>
+                <p class="sidebar-content"><a href="#">Italy</a></p>
+            </div>
+
+            <div class="sidebar-section">
+                <h3 class="sidebar-label">Language</h3>
+                <p class="sidebar-content"><a href="#">Italian</a></p>
+            </div>
+
+        </div>
+
+    </div>
+
+    <!-- FOOTER -->
+    <footer>
+        <div class="footer-inner">
+            <nav class="footer-nav">
+                <a href="#">About</a>
+                <a href="#">News</a>
+                <a href="#">Apps</a>
+                <a href="#">Help</a>
+                <a href="#">Terms</a>
+                <a href="#">API</a>
+                <a href="#">Contact</a>
+            </nav>
+            <p class="footer-copy">© Letterboxdng Limited. Sito non ufficialeng ma quasi.</p>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
