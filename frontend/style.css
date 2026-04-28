@@ -804,3 +804,9 @@ textarea.field-input {
     .star-rating { margin: 4px 0; }
     .film-actions { flex-wrap: wrap; row-gap: 8px; }
 }
+
+.avg-stars {
+    font-size: 18px;
+    letter-spacing: 2px;
+    margin-top: 4px;
+}

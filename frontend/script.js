@@ -36,38 +36,51 @@ if (document.getElementById("reviews")) {
             const container = document.getElementById("reviews");
             container.innerHTML = '';
 
-            // ── MEDIA + ISTOGRAMMA ─────────────────────────
-            if (data.length > 0) {
-                const avg = data.reduce((sum, r) => sum + parseFloat(r.rating || 0), 0) / data.length;
-                const avgEl = document.getElementById("avg-rating");
-                if (avgEl) avgEl.textContent = avg.toFixed(1);
-
-                // conta quante recensioni per ogni voto (1,2,3,4,5)
-                const counts = {1:0, 2:0, 3:0, 4:0, 5:0};
-                data.forEach(r => {
-                    const v = Math.round(parseFloat(r.rating));
-                    if (counts[v] !== undefined) counts[v]++;
-                });
-
-                const max = Math.max(...Object.values(counts), 1);
-                const labels = {1:'1', 2:'2', 3:'3', 4:'4', 5:'5'};
-
-                const barsEl = document.querySelector('.histogram-bars');
-                if (barsEl) {
-                    barsEl.innerHTML = Object.entries(counts).map(([val, count]) => `
-                        <div class="hbar" style="height:${Math.max((count / max) * 100, 4)}%">
-                            <span>${labels[val]}</span>
-                        </div>
-                    `).join('');
-                }
-            }
-            // ───────────────────────────────────────────────
-
             if (data.length === 0) {
                 container.innerHTML = '<p style="color:#556677;font-size:14px;padding:16px 0;">Nessuna recensione ancora. Sii il primo!</p>';
                 return;
             }
 
+            // ── MEDIA ─────────────────────────────────────
+            const avg = data.reduce((sum, r) => sum + parseFloat(r.rating || 0), 0) / data.length;
+
+            const avgEl = document.getElementById("avg-rating");
+            if (avgEl) avgEl.textContent = avg.toFixed(1);
+
+            // ── STELLE MEDIA ──────────────────────────────
+            const avgStarsEl = document.getElementById("avg-stars");
+            if (avgStarsEl) {
+                let starsHtml = '';
+                for (let i = 1; i <= 5; i++) {
+                    if (avg >= i) {
+                        starsHtml += '<span style="color:var(--orange)">★</span>';
+                    } else if (avg >= i - 0.5) {
+                        starsHtml += '<span style="color:var(--orange)">½</span>';
+                    } else {
+                        starsHtml += '<span style="color:var(--border)">★</span>';
+                    }
+                }
+                avgStarsEl.innerHTML = starsHtml;
+            }
+
+            // ── ISTOGRAMMA ────────────────────────────────
+            const counts = {1:0, 2:0, 3:0, 4:0, 5:0};
+            data.forEach(r => {
+                const v = Math.round(parseFloat(r.rating));
+                if (counts[v] !== undefined) counts[v]++;
+            });
+
+            const max = Math.max(...Object.values(counts), 1);
+            const barsEl = document.querySelector('.histogram-bars');
+            if (barsEl) {
+                barsEl.innerHTML = Object.entries(counts).map(([val, count]) => `
+                    <div class="hbar" style="height:${Math.max((count / max) * 100, 4)}%">
+                        <span>${val}</span>
+                    </div>
+                `).join('');
+            }
+
+            // ── RECENSIONI ────────────────────────────────
             data.forEach(r => {
                 const initials = getInitials(r.username || r.movie || 'U');
                 const div = document.createElement('div');
@@ -85,5 +98,9 @@ if (document.getElementById("reviews")) {
                 `;
                 container.appendChild(div);
             });
+        })
+        .catch(() => {
+            const container = document.getElementById("reviews");
+            container.innerHTML = '<p style="color:#556677;font-size:14px;padding:16px 0;">Impossibile caricare le recensioni.</p>';
         });
 }
