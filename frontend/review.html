@@ -10,212 +10,248 @@
 </head>
 <body>
 
-<!-- ── HEADER ─────────────────────────────────────── -->
-<header>
-    <div class="header-inner">
-        <div class="header-left">
-            <a href="index.html">
-                <img class="logo" src="letterboxdng.png" alt="Letterboxd"/>
-            </a>
-            <nav class="main-nav">
+    <!-- ── HEADER ─────────────────────────────────────── -->
+    <header>
+        <div class="header-inner">
+            <div class="header-left">
+                <a href="index.html">
+                    <img class="logo" src="letterboxdng.png" alt="Letterboxd"/>
+                </a>
+                <nav class="main-nav">
+                    <a href="#">Films</a>
+                    <a href="#">Members</a>
+                    <a href="#">Journal</a>
+                </nav>
+            </div>
+            <div class="header-right">
+                <a href="#" class="btn-sign-in">Sign in</a>
+                <a href="#" class="btn-create">Create account</a>
+            </div>
+        </div>
+    </header>
+
+    <!-- ── MAIN ────────────────────────────────────────── -->
+    <main>
+        <div class="review-page-wrap">
+
+            <!-- Breadcrumb -->
+            <div class="breadcrumb">
+                <a href="index.html">Tutti odiano il momento mini-film</a>
+                <span class="breadcrumb-sep">›</span>
+                <span>Scrivi una recensione</span>
+            </div>
+
+            <!-- Film mini-header -->
+            <div class="film-hero-inner">
+                <div class="film-poster-wrap">
+                    <img class="film-poster" src="poster.png" alt="Poster"/>
+                </div>
+                <div class="film-info">
+                    <h1 class="film-title">Tutti odiano il momento mini-film</h1>
+                    <div class="film-meta">
+                        <a href="#" class="film-year">2026</a>
+                        <span class="film-directed">Directed by <a href="#">Arturo Brundo</a></span>
+                    </div>
+                    <p class="film-synopsis">Un simpatico e disfunzionale gruppo di amici si ritrova giornalmente nella biblioteca di un piccolo paesino di campagna. I ragazzi in breve tempo fanno amicizia e vivono esperienze al limite del surreale. Ispirato ai quadri di Salvador Dalì, il visionario regista descrive una pittoresca realtà quotidiana, al cui interno si nasconde un terribile segreto.</p>
+
+                </div>
+            </div>
+
+            <p class="review-page-title">La tua recensione</p>
+
+            <!-- Form -->
+            <form class="review-form" id="review-form" autocomplete="off">
+
+                <div class="fields-row">
+                    <!-- Username -->
+                    <div class="field-group">
+                        <label class="field-label" for="username">Nome utente</label>
+                        <input
+                            class="field-input"
+                            type="text"
+                            id="username"
+                            placeholder="es. cinefilo_67"
+                            maxlength="40"
+                            required
+                        />
+                    </div>
+
+                    <!-- Star rating -->
+                    <div class="field-group form-star-wrap">
+                        <span class="field-label">Voto</span>
+                        <div class="form-stars" id="form-stars">
+                            <span class="form-star" data-val="1">★</span>
+                            <span class="form-star" data-val="2">★</span>
+                            <span class="form-star" data-val="3">★</span>
+                            <span class="form-star" data-val="4">★</span>
+                            <span class="form-star" data-val="5">★</span>
+                        </div>
+                        <div class="rating-label-text" id="rating-label">Seleziona un voto</div>
+                        <input type="hidden" id="rating-value" value="0" />
+                    </div>
+                </div>
+
+                <div class="form-divider"></div>
+
+                <!-- Review text -->
+                <div class="field-group">
+                    <label class="field-label" for="review-text">Recensione</label>
+                    <textarea
+                        class="field-input"
+                        id="review-text"
+                        placeholder="Cosa hai pensato di questo film? Condividi le tue impressioni..."
+                        maxlength="2000"
+                        required
+                    ></textarea>
+                    <div class="char-counter" id="char-counter">0 / 2000</div>
+                </div>
+
+                <!-- Submit row -->
+                <div class="form-submit-row">
+                    <button type="submit" class="btn-submit" id="btn-submit">Salva recensione</button>
+                    <button type="button" class="btn-cancel" id="btn-cancel" onclick="history.back()">Annulla</button>
+                </div>
+
+            </form>
+
+        </div>
+    </main>
+
+    <!-- ── FOOTER ─────────────────────────────────────── -->
+    <footer>
+        <div class="footer-inner">
+            <nav class="footer-nav">
+                <a href="#">About</a>
+                <a href="#">News</a>
+                <a href="#">Pro</a>
+                <a href="#">Apps</a>
                 <a href="#">Films</a>
                 <a href="#">Members</a>
                 <a href="#">Journal</a>
+                <a href="#">Podcast</a>
             </nav>
+            <p class="footer-copy">© Letterboxdng Limited. Sito non ufficialeng ma quasi.</p>
         </div>
-        <div class="header-right">
-            <a href="#" class="btn-sign-in">Sign in</a>
-            <a href="#" class="btn-create">Create account</a>
-        </div>
-    </div>
-</header>
+    </footer>
 
-<!-- ── MAIN ────────────────────────────────────────── -->
-<main>
-    <div class="review-page-wrap">
+    <!-- Toast -->
+    <div class="toast" id="toast"></div>
 
-        <!-- Breadcrumb -->
-        <div class="breadcrumb">
-            <a href="index.html">Tutti odiano il momento mini-film</a>
-            <span class="breadcrumb-sep">›</span>
-            <span>Scrivi una recensione</span>
-        </div>
+    <script>
+        const API = "https://letterboxdng.onrender.com";
 
-        <!-- Film mini-header -->
-        <div class="film-hero-inner">
-            <div class="film-poster-wrap">
-                <img class="film-poster" src="poster.png" alt="Poster"/>
-            </div>
-            <div class="film-info">
-                <h1 class="film-title">Tutti odiano il momento mini-film</h1>
-                <div class="film-meta">
-                    <a href="#" class="film-year">2026</a>
-                    <span class="film-directed">Directed by <a href="#">Arturo Brundo</a></span>
-                </div>
-                <p class="film-synopsis">Un simpatico e disfunzionale gruppo di amici si ritrova giornalmente nella biblioteca di un piccolo paesino di campagna. I ragazzi in breve tempo fanno amicizia e vivono esperienze al limite del surreale. Ispirato ai quadri di Salvador Dalì, il visionario regista descrive una pittoresca realtà quotidiana, al cui interno si nasconde un terribile segreto.</p>
+        const formStars = document.querySelectorAll('.form-star');
+        const ratingInput = document.getElementById('rating-value');
+        const ratingLabel = document.getElementById('rating-label');
 
-            </div>
-        </div>
+        const RATING_LABELS = {
+            0.5: 'Pessimo',
+            1: 'Scarso',
+            1.5: 'Quasi mediocre',
+            2: 'Mediocre',
+            2.5: 'Così così',
+            3: 'Nella media',
+            3.5: 'Carino',
+            4: 'Buono',
+            4.5: 'Ottimo',
+            5: 'Eccellente'
+        };
 
-        <p class="review-page-title">La tua recensione</p>
+        function setStars(val, permanent = false) {
+            formStars.forEach((star, i) => {
+                const starVal = i + 1;
 
-        <!-- Form -->
-        <form class="review-form" id="review-form" autocomplete="off">
+                star.classList.remove('full', 'half');
 
-            <div class="fields-row">
-                <!-- Username -->
-                <div class="field-group">
-                    <label class="field-label" for="username">Nome utente</label>
-                    <input
-                        class="field-input"
-                        type="text"
-                        id="username"
-                        placeholder="es. cinefilo_67"
-                        maxlength="40"
-                        required
-                    />
-                </div>
+                if (val >= starVal) {
+                    star.classList.add('full');
+                } else if (val >= starVal - 0.5) {
+                    star.classList.add('half');
+                }
+            });
 
-                <!-- Star rating -->
-                <div class="field-group form-star-wrap">
-                    <span class="field-label">Voto</span>
-                    <div class="form-stars" id="form-stars">
-                        <span class="form-star" data-val="1">★</span>
-                        <span class="form-star" data-val="2">★</span>
-                        <span class="form-star" data-val="3">★</span>
-                        <span class="form-star" data-val="4">★</span>
-                        <span class="form-star" data-val="5">★</span>
-                    </div>
-                    <div class="rating-label-text" id="rating-label">Seleziona un voto</div>
-                    <input type="hidden" id="rating-value" value="0" />
-                </div>
-            </div>
+            ratingLabel.textContent = val > 0 ? RATING_LABELS[val] : 'Seleziona un voto';
+            ratingLabel.style.color = val > 0 ? 'var(--orange)' : '';
 
-            <div class="form-divider"></div>
+            if (permanent) ratingInput.value = val;
+        }
 
-            <!-- Review text -->
-            <div class="field-group">
-                <label class="field-label" for="review-text">Recensione</label>
-                <textarea
-                    class="field-input"
-                    id="review-text"
-                    placeholder="Cosa hai pensato di questo film? Condividi le tue impressioni..."
-                    maxlength="2000"
-                    required
-                ></textarea>
-                <div class="char-counter" id="char-counter">0 / 2000</div>
-            </div>
+        formStars.forEach((star, i) => {
+            star.addEventListener('mousemove', (e) => {
+                const rect = star.getBoundingClientRect();
+                const isHalf = e.clientX - rect.left < rect.width / 2;
+                const value = isHalf ? i + 0.5 : i + 1;
+                setStars(value);
+            });
 
-            <!-- Submit row -->
-            <div class="form-submit-row">
-                <button type="submit" class="btn-submit" id="btn-submit">Salva recensione</button>
-                <button type="button" class="btn-cancel" id="btn-cancel" onclick="history.back()">Annulla</button>
-            </div>
+            star.addEventListener('mouseleave', () => {
+                setStars(parseFloat(ratingInput.value));
+            });
 
-        </form>
-
-    </div>
-</main>
-
-<!-- ── FOOTER ─────────────────────────────────────── -->
-<footer>
-    <div class="footer-inner">
-        <nav class="footer-nav">
-            <a href="#">About</a>
-            <a href="#">News</a>
-            <a href="#">Pro</a>
-            <a href="#">Apps</a>
-            <a href="#">Films</a>
-            <a href="#">Members</a>
-            <a href="#">Journal</a>
-            <a href="#">Podcast</a>
-        </nav>
-        <p class="footer-copy">© Letterboxdng Limited. Sito non ufficialeng ma quasi.</p>
-    </div>
-</footer>
-
-<!-- Toast -->
-<div class="toast" id="toast"></div>
-
-<script>
-const API = "https://letterboxdng.onrender.com";
-
-const RATING_LABELS = ['', 'Scarso', 'Mediocre', 'Nella media', 'Buono', 'Eccellente'];
-
-// ── STAR RATING ──────────────────────────────────────
-const formStars = document.querySelectorAll('.form-star');
-const ratingInput = document.getElementById('rating-value');
-const ratingLabel = document.getElementById('rating-label');
-
-function setStars(val, permanent = false) {
-    formStars.forEach((s, i) => s.classList.toggle('active', i < val));
-    ratingLabel.textContent = val > 0 ? RATING_LABELS[val] : 'Seleziona un voto';
-    ratingLabel.style.color = val > 0 ? 'var(--orange)' : '';
-    if (permanent) ratingInput.value = val;
-}
-
-formStars.forEach((star, i) => {
-    star.addEventListener('mouseenter', () => setStars(i + 1));
-    star.addEventListener('mouseleave', () => setStars(parseInt(ratingInput.value)));
-    star.addEventListener('click', () => setStars(i + 1, true));
-});
-
-// ── CHAR COUNTER ─────────────────────────────────────
-const textarea = document.getElementById('review-text');
-const counter  = document.getElementById('char-counter');
-textarea.addEventListener('input', () => {
-    const len = textarea.value.length;
-    counter.textContent = `${len} / 2000`;
-    counter.classList.toggle('near-limit', len > 1800);
-});
-
-// ── TOAST ────────────────────────────────────────────
-function showToast(msg, type = 'success') {
-    const t = document.getElementById('toast');
-    t.textContent = msg;
-    t.className = `toast ${type} show`;
-    setTimeout(() => t.classList.remove('show'), 3000);
-}
-
-// ── SUBMIT ────────────────────────────────────────────
-document.getElementById('review-form').addEventListener('submit', async (e) => {
-    e.preventDefault();
-
-    const username = document.getElementById('username').value.trim();
-    const text     = textarea.value.trim();
-    const rating   = parseInt(ratingInput.value);
-
-    if (!username) { showToast('Inserisci un nome utente.', 'error'); return; }
-    if (rating < 1) { showToast('Seleziona un voto da 1 a 5.', 'error'); return; }
-    if (!text)      { showToast('Scrivi almeno qualcosa!', 'error'); return; }
-
-    const btn = document.getElementById('btn-submit');
-    btn.disabled = true;
-    btn.textContent = 'Salvataggio…';
-
-    try {
-        const res = await fetch(API + '/reviews', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({
-                movie: 'Tutti odiano il momento minifilm',
-                username,
-                text,
-                rating,
-                date: new Date().toLocaleDateString('it-IT', { day: 'numeric', month: 'long', year: 'numeric' })
-            })
+            star.addEventListener('click', (e) => {
+                const rect = star.getBoundingClientRect();
+                const isHalf = e.clientX - rect.left < rect.width / 2;
+                const value = isHalf ? i + 0.5 : i + 1;
+                setStars(value, true);
+            });
         });
 
-        if (!res.ok) throw new Error('Errore server');
+        // ── CHAR COUNTER ─────────────────────────────────────
+        const textarea = document.getElementById('review-text');
+        const counter  = document.getElementById('char-counter');
+        textarea.addEventListener('input', () => {
+            const len = textarea.value.length;
+            counter.textContent = `${len} / 2000`;
+            counter.classList.toggle('near-limit', len > 1800);
+        });
 
-        showToast('Recensione salvata!', 'success');
-        setTimeout(() => window.location.href = 'index.html', 1200);
-    } catch (err) {
-        showToast('Errore durante il salvataggio. Riprova.', 'error');
-        btn.disabled = false;
-        btn.textContent = 'Salva recensione';
-    }
-});
-</script>
+        // ── TOAST ────────────────────────────────────────────
+        function showToast(msg, type = 'success') {
+            const t = document.getElementById('toast');
+            t.textContent = msg;
+            t.className = `toast ${type} show`;
+            setTimeout(() => t.classList.remove('show'), 3000);
+        }
+
+        // ── SUBMIT ────────────────────────────────────────────
+        document.getElementById('review-form').addEventListener('submit', async (e) => {
+            e.preventDefault();
+
+            const username = document.getElementById('username').value.trim();
+            const text     = textarea.value.trim();
+            const rating = parseFloat(ratingInput.value);
+
+            if (!username) { showToast('Inserisci un nome utente.', 'error'); return; }
+            if (rating < 1) { showToast('Seleziona un voto da 1 a 5.', 'error'); return; }
+            if (!text)      { showToast('Scrivi almeno qualcosa!', 'error'); return; }
+
+            const btn = document.getElementById('btn-submit');
+            btn.disabled = true;
+            btn.textContent = 'Salvataggio…';
+
+            try {
+                const res = await fetch(API + '/reviews', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        movie: 'Tutti odiano il momento minifilm',
+                        username,
+                        text,
+                        rating,
+                        date: new Date().toLocaleDateString('it-IT', { day: 'numeric', month: 'long', year: 'numeric' })
+                    })
+                });
+
+                if (!res.ok) throw new Error('Errore server');
+
+                showToast('Recensione salvata!', 'success');
+                setTimeout(() => window.location.href = 'index.html', 1200);
+            } catch (err) {
+                showToast('Errore durante il salvataggio. Riprova.', 'error');
+                btn.disabled = false;
+                btn.textContent = 'Salva recensione';
+            }
+        });
+    </script>
 </body>
 </html>

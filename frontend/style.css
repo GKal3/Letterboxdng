@@ -205,6 +205,14 @@ header {
 }
 .star:hover,
 .star.active { color: var(--orange); }
+.star.full { color: var(--orange); }
+.star.half {
+    background: linear-gradient(90deg, var(--orange) 50%, var(--border) 50%);
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+.star.empty { color: var(--border); }
 
 .btn-review {
     font-size: 12px;
@@ -603,6 +611,15 @@ textarea.field-input {
 }
 .form-star:hover { transform: scale(1.1); }
 .form-star.active { color: var(--orange); }
+
+.form-star.full { color: var(--orange); }
+.form-star.half {
+    background: linear-gradient(90deg, var(--orange) 50%, var(--border) 50%);
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}  
+
 .rating-label-text {
     font-size: 11px;
     color: #556677;

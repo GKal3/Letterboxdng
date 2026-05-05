@@ -19,10 +19,19 @@ stars.forEach((star, i) => {
 
 // ── CARICA RECENSIONI (index.html) ───────────────────
 function renderStars(n) {
-    const full = Math.floor(n);
-    let out = '★'.repeat(full);
-    if (n % 1 >= 0.5) out += '½';
-    return out || '–';
+    let html = '';
+
+    for (let i = 1; i <= 5; i++) {
+        if (n >= i) {
+            html += '<span class="star full">★</span>';
+        } else if (n >= i - 0.5) {
+            html += '<span class="star half">★</span>';
+        } else {
+            html += '<span class="star empty">★</span>';
+        }
+    }
+
+    return html;
 }
 
 function getInitials(name) {
@@ -49,18 +58,9 @@ if (document.getElementById("reviews")) {
 
             // ── STELLE MEDIA ──────────────────────────────
             const avgStarsEl = document.getElementById("avg-stars");
+            const avgStarsEl = document.getElementById("avg-stars");
             if (avgStarsEl) {
-                let starsHtml = '';
-                for (let i = 1; i <= 5; i++) {
-                    if (avg >= i) {
-                        starsHtml += '<span style="color:var(--orange)">★</span>';
-                    } else if (avg >= i - 0.5) {
-                        starsHtml += '<span style="color:var(--orange)">½</span>';
-                    } else {
-                        starsHtml += '<span style="color:var(--border)">★</span>';
-                    }
-                }
-                avgStarsEl.innerHTML = starsHtml;
+                avgStarsEl.innerHTML = renderStars(avg);
             }
 
             // ── ISTOGRAMMA ────────────────────────────────
