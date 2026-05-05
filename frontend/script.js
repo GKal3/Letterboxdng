@@ -58,7 +58,6 @@ if (document.getElementById("reviews")) {
 
             // ── STELLE MEDIA ──────────────────────────────
             const avgStarsEl = document.getElementById("avg-stars");
-            const avgStarsEl = document.getElementById("avg-stars");
             if (avgStarsEl) {
                 avgStarsEl.innerHTML = renderStars(avg);
             }
